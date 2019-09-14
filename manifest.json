@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "limit-twitter",
-  "version": "0.1",
+  "version": "0.1.2",
 
   "description": "Redirect to app.pocket.com (for now)",
 
