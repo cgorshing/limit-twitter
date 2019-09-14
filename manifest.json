@@ -5,10 +5,6 @@
 
   "description": "Redirect to app.pocket.com (for now)",
 
-  "icons": {
-    "48": "icons/border-48.png"
-  },
-
   "content_scripts": [
     {
       "matches": ["*://*.twitter.com/*"],
