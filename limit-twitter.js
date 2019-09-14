@@ -1,1 +1,1 @@
-//document.location.href = 'https://app.getpocket.com/';
+document.location.href = 'https://app.getpocket.com/';
