@@ -4,6 +4,12 @@
   "version": "0.1.2",
 
   "description": "Redirect to app.pocket.com (for now)",
+  "homepage_url": "https://github.com/cgorshing/limit-twitter",
+
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
 
   "content_scripts": [
     {
