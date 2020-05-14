@@ -7,8 +7,6 @@
   "homepage_url": "https://github.com/cgorshing/limit-twitter",
 
   "permissions": [
-    "activeTab",
-    "tabs",
     "storage"
   ],
 
