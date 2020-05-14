@@ -1,17 +1,23 @@
 'use strict';
 
-// let maxTime = 1 * 60 * 1000
-let maxTime = 10 * 1000
+let maxTime = 30 * 60 * 1000
+// let maxTime = 10 * 1000;
 
 let timeoutID = -1;
+
+let storage_get_arg = {
+  on_date: today(),
+  time_spent: 0
+}
+
+let redirectToApp = () => {
+  location.assign('https://app.getpocket.com/');
+}
 
 /* generic error handler */
 function onError(error) {
   console.log(error);
 }
-
-// TODO WHEN YOU JUST CLOSE THE TAB, THESE EVENTS DON'T FIRE!!!!!!
-// FIX THAT NEXT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 let startedTime = Date.now();
 
@@ -25,11 +31,11 @@ let maxTimeExpired = () => {
   if (window.confirm(`Hey there - you have gone passed your budgeted amount for time on "the twitters".
 
   Click OK to go to Pocket now, otherwise we'll give ya 10 seconds.`)) {
-    location.assign('https://app.getpocket.com/');
+    redirectToApp();
   }
   else {
     setTimeout(() => {
-      location.assign('https://app.getpocket.com/');
+      redirectToApp();
     }, 10000);
   }
 }
@@ -42,7 +48,7 @@ let timeRetreived = (timeSpent) => {
   console.log(`timeSpent=${timeSpent}`);
   if (timeSpent >= maxTime) {
     // console.log('Should be redirecting now, but you have it commented out');
-    location.assign('https://app.getpocket.com/');
+    redirectToApp();
   }
   else {
     timeoutID = setTimeout(maxTimeExpired, maxTime - timeSpent);
@@ -60,10 +66,7 @@ let visibilityChangeEvent = (e) => {
     // TODO How will we handle changing crossing over midnight
     // TODO How will we handle chaning timezones?
 
-    let gettingItem = browser.storage.local.get({
-      on_date: today(),
-      time_spent: 0
-    });
+    let gettingItem = browser.storage.local.get(storage_get_arg);
 
     gettingItem.then((result) => {
       timeRetreived(result.time_spent);
@@ -79,10 +82,7 @@ document.addEventListener("visibilitychange", visibilityChangeEvent, true);
 let storeTimeSpent = () => {
   // console.log(`NOT Visible! ${startedTime} ${startedTime != null}`);
   if (startedTime != null) {
-    let gettingItem = browser.storage.local.get({
-      on_date: today(),
-      time_spent: 0
-    });
+    let gettingItem = browser.storage.local.get(storage_get_arg);
 
     let timeSpent = 0;
 
@@ -111,5 +111,9 @@ function today() {
 
   return `${year}-${month}-${date}`;
 }
+
+window.addEventListener('beforeunload', function (e) {
+  storeTimeSpent();
+});
 
 visibilityChangeEvent(null);
