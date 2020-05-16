@@ -55,7 +55,7 @@ let timeRetreived = (timeSpent) => {
   }
 }
 
-let visibilityChangeEvent = (e) => {
+let visibilityChangeEvent = (e = null) => {
   // console.log(`event fired ${e} ${startedTime}`);
 
   //https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
@@ -80,7 +80,6 @@ let visibilityChangeEvent = (e) => {
 document.addEventListener("visibilitychange", visibilityChangeEvent, true);
 
 let storeTimeSpent = () => {
-  // console.log(`NOT Visible! ${startedTime} ${startedTime != null}`);
   if (startedTime != null) {
     let gettingItem = browser.storage.local.get(storage_get_arg);
 
@@ -90,8 +89,6 @@ let storeTimeSpent = () => {
       if (result.time_spent != undefined && result.time_spent != null) {
         timeSpent = result.time_spent;
       }
-
-      console.log(`store off=${timeSpent + (Date.now() - startedTime)}`);
 
       browser.storage.local.set({
         on_date: today(),
@@ -116,4 +113,4 @@ window.addEventListener('beforeunload', function (e) {
   storeTimeSpent();
 });
 
-visibilityChangeEvent(null);
+visibilityChangeEvent();
