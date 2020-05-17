@@ -1,7 +1,6 @@
 'use strict';
 
 let maxTime = 30 * 60 * 1000
-// let maxTime = 10 * 1000;
 
 let timeoutID = -1;
 
@@ -43,13 +42,10 @@ let maxTimeExpired = () => {
 }
 
 let timeRetreived = (timeSpent) => {
-  console.log(`time_spent retreived=${timeSpent}`);
-
   if (timeSpent == undefined || timeSpent == null) timeSpent = 0;
 
   console.log(`timeSpent=${timeSpent}`);
   if (timeSpent >= maxTime) {
-    // console.log('Should be redirecting now, but you have it commented out');
     redirectToApp();
   }
   else {
@@ -58,22 +54,14 @@ let timeRetreived = (timeSpent) => {
 }
 
 let visibilityChangeEvent = (e = null) => {
-  // console.log(`event fired ${e} ${startedTime}`);
-
   //https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
   if (document.visibilityState === 'visible') {
-    console.log(`Visible!`);
     startedTime = Date.now();
-    // TODO Start the timer of "now" + time left for the day (or time left in the day)
-    // TODO How will we handle changing crossing over midnight
-    // TODO How will we handle chaning timezones?
-
     let gettingItem = browser.storage.local.get(storage_get_arg);
 
     gettingItem.then((result) => {
       timeRetreived(result.time_spent);
     });
-
   }
   else {
     storeTimeSpent();
