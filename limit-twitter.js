@@ -5,9 +5,11 @@ let maxTime = 30 * 60 * 1000
 
 let timeoutID = -1;
 
-let storage_get_arg = {
-  on_date: today(),
-  time_spent: 0
+let storage_get_arg = () => {
+  return {
+    on_date: today(),
+    time_spent: 0
+  }
 }
 
 let redirectToApp = () => {
