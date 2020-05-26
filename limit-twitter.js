@@ -29,6 +29,7 @@ let maxTimeExpired = () => {
   // Show dialog warning of redirect in 30 seconds
   alert(`Hey there - you have gone passed your budgeted amount for time on "the twitters"`);
 
+  // TODO Need to find out a better way of showing a modal dialog
   if (window.confirm(`Hey there - you have gone passed your budgeted amount for time on "the twitters".
 
   Click OK to go to Pocket now, otherwise we'll give ya 10 seconds.`)) {
