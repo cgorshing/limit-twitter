@@ -25,21 +25,7 @@ let startedTime = Date.now();
 let maxTimeExpired = () => {
   storeTimeSpent();
 
-  // TODO Callback that time has expired
-  // Show dialog warning of redirect in 30 seconds
-  alert(`Hey there - you have gone passed your budgeted amount for time on "the twitters"`);
-
-  // TODO Need to find out a better way of showing a modal dialog
-  if (window.confirm(`Hey there - you have gone passed your budgeted amount for time on "the twitters".
-
-  Click OK to go to Pocket now, otherwise we'll give ya 10 seconds.`)) {
-    redirectToApp();
-  }
-  else {
-    setTimeout(() => {
-      redirectToApp();
-    }, 10000);
-  }
+  redirectToApp();
 }
 
 let timeRetreived = (timeSpent) => {
