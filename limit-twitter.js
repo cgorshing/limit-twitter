@@ -44,7 +44,7 @@ let visibilityChangeEvent = (e = null) => {
   //https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
   if (document.visibilityState === 'visible') {
     startedTime = Date.now();
-    let gettingItem = browser.storage.local.get(storage_get_arg);
+    let gettingItem = browser.storage.local.get(storage_get_arg());
 
     gettingItem.then((result) => {
       timeRetreived(result.time_spent);
@@ -58,7 +58,7 @@ document.addEventListener("visibilitychange", visibilityChangeEvent, true);
 
 let storeTimeSpent = () => {
   if (startedTime != null) {
-    let gettingItem = browser.storage.local.get(storage_get_arg);
+    let gettingItem = browser.storage.local.get(storage_get_arg());
 
     let timeSpent = 0;
 
