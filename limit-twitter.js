@@ -31,9 +31,6 @@ let maxTimeExpired = () => {
 }
 
 let timeRetreived = (timeSpent) => {
-  if (timeSpent == undefined || timeSpent == null) timeSpent = 0;
-
-  console.log(`timeSpent=${timeSpent}`);
   if (timeSpent >= maxTime) {
     redirectToApp();
   }
@@ -42,32 +39,38 @@ let timeRetreived = (timeSpent) => {
   }
 }
 
+let resolveFromStorage = (result) => {
+  if (result !== undefined && result !== null && result.on_date === today()) {
+    return result.time_spent;
+  }
+
+  return 0;
+}
+
 let visibilityChangeEvent = (e = null) => {
   //https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
   if (document.visibilityState === 'visible') {
     startedTime = Date.now();
-    let gettingItem = browser.storage.local.get(storage_get_arg());
 
-    gettingItem.then((result) => {
-      timeRetreived(result.time_spent);
+    browser.storage.local.get(storage_get_arg(), (result) => {
+      console.log("We pulled out1 %O", result);
+      timeRetreived(resolveFromStorage(result));
     });
   }
   else {
     storeTimeSpent();
   }
 }
-document.addEventListener("visibilitychange", visibilityChangeEvent, true);
 
 let storeTimeSpent = () => {
   if (startedTime != null) {
-    let gettingItem = browser.storage.local.get(storage_get_arg());
-
     let timeSpent = 0;
 
-    gettingItem.then((result) => {
-      if (result.time_spent != undefined && result.time_spent != null) {
-        timeSpent = result.time_spent;
-      }
+    // Other tabs might have written to storage this new tab doesn't know about
+    // So ... call "get"
+    browser.storage.local.get(storage_get_arg(), (result) => {
+      timeSpent = resolveFromStorage(result);
+
 
       browser.storage.local.set({
         on_date: today(),
@@ -87,6 +90,8 @@ function today() {
 
   return `${year}-${month}-${date}`;
 }
+
+document.addEventListener("visibilitychange", visibilityChangeEvent, true);
 
 window.addEventListener('beforeunload', function (e) {
   storeTimeSpent();
