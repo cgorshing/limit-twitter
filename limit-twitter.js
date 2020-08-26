@@ -1,6 +1,8 @@
 'use strict';
 
 let maxTime = 30 * 60 * 1000
+if(typeof chrome!=="undefined"){browser=chrome;}
+
 
 let timeoutID = -1;
 
