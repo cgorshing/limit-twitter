@@ -5,6 +5,9 @@
 
   "description": "Redirect to app.pocket.com (for now)",
   "homepage_url": "https://github.com/cgorshing/limit-twitter",
+  "icons": {
+    "48": "icons/link-48.png"
+  },
 
   "permissions": [
     "storage"
@@ -15,5 +18,6 @@
       "matches": ["*://*.twitter.com/*"],
       "js": ["limit-twitter.js"]
     }
-  ]
+  ],
+  "default_locale": "en"
 }
