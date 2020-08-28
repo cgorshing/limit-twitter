@@ -14,7 +14,8 @@ let storage_get_arg = () => {
 }
 
 let redirectToApp = () => {
-  location.assign('https://app.getpocket.com/');
+  //location.assign('https://app.getpocket.com/');
+  canWeShowDialog();
 }
 
 /* generic error handler */
@@ -98,3 +99,35 @@ window.addEventListener('beforeunload', function (e) {
 });
 
 visibilityChangeEvent();
+
+let canWeShowDialog = () => {
+  if (document.querySelector('#openModal') !== null) return;
+
+  let openModal = document.createElement("div");
+  openModal.setAttribute("id", "openModal");
+  openModal.className = "modalDialog";
+
+  let emptyDiv = document.createElement("div");
+  openModal.appendChild(emptyDiv);
+
+  let header = document.createElement("h2");
+  header.textContent = browser.i18n.getMessage("overlayTitle");
+  let paragraph1 = document.createElement("p");
+  paragraph1.textContent = browser.i18n.getMessage("overlayParagraph1");
+  let paragraph2 = document.createElement("p");
+  paragraph2.textContent = browser.i18n.getMessage("overlayParagraph2");
+
+  // var a = document.createElement('a');
+  // var url = document.createTextNode(browser.i18n.getMessage("actionTitle"));
+  // a.href = browser.i18n.getMessage("actionUrl");
+  // a.target = '_blank';
+  // a.appendChild(url);
+  // paragraph2.appendChild(a);
+
+
+  emptyDiv.appendChild(header);
+  emptyDiv.appendChild(paragraph1);
+  emptyDiv.appendChild(paragraph2);
+
+  document.body.appendChild(openModal);
+}

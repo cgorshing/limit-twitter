@@ -1,27 +1,26 @@
 {
-  "extensionName": {
-    "message": "Notify link clicks i18n",
-    "description": "Name of the extension."
+  "overlayTitle": {
+    "message": "Limiting Your Twitter Time",
+    "description": "Title of the overlay modal dialog."
   },
 
-  "extensionDescription": {
-    "message": "Shows a notification when the user clicks on links.",
-    "description": "Description of the extension."
+  "overlayParagraph1": {
+    "message": "The time has ellapsed for this wonderful site. We know you want to check out what is happening. But we would like to nudge you towards something more meaningful.",
+    "description": "First paragraph of the overlay modal dialog."
   },
 
-  "notificationTitle": {
-    "message": "Click notification",
-    "description": "Title of the click notification."
+  "overlayParagraph2": {
+    "message": "Might we suggest a little Pocket App reading instead?",
+    "description": "Second paragraph of the overlay modal dialog."
   },
 
-  "notificationContent": {
-    "message": "You clicked $URL$.",
-    "description": "Tells the user which link they clicked.",
-    "placeholders": {
-      "url" : {
-        "content" : "$1",
-        "example" : "https://developer.mozilla.org"
-      }
-    }
+  "actionTitle": {
+    "message": "Head to Pocket",
+    "description": "Not used yet."
+  },
+
+  "actionUrl": {
+    "message": "https://app.getpocket.com",
+    "description": "Not used yet."
   }
 }

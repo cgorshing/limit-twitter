@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "limit-twitter",
-  "version": "0.1.2",
+  "version": "0.1.4",
 
   "description": "Redirect to app.pocket.com (for now)",
   "homepage_url": "https://github.com/cgorshing/limit-twitter",
@@ -15,8 +15,11 @@
 
   "content_scripts": [
     {
+      "exclude_matches": ["*://developer.twitter.com/*", "*://analytics.twitter.com/*"],
       "matches": ["*://*.twitter.com/*"],
-      "js": ["limit-twitter.js"]
+      "css": ["style.css"],
+      "js": ["limit-twitter.js"],
+      "run_at": "document_idle"
     }
   ],
   "default_locale": "en"
